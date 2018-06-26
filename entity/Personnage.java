@@ -10,6 +10,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.monapp.enumeration.Job;
+
 @Entity
 @Table(name="PERSONNAGE")
 public class Personnage {
@@ -26,8 +28,7 @@ public class Personnage {
 	private String image;
 	
 	@Column(name="JOB", nullable=false, length=160)
-	private String job;
-	
+	private Job job;
 
 	@OneToOne
 	@JoinColumn(name="PARTIE_ID")
@@ -41,7 +42,7 @@ public class Personnage {
 	public Personnage() {
 	}
 	
-	public Personnage(int id, String name, String image, String job, Partie partie, @NotNull Inventaire inventaire) {
+	public Personnage(int id, String name, String image, Job job, Partie partie, @NotNull Inventaire inventaire) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -75,11 +76,11 @@ public class Personnage {
 		this.image = image;
 	}
 	
-	public String getJob() {
+	public Job getJob() {
 		return job;
 	}
 	
-	public void setJob(String job) {
+	public void setJob(Job job) {
 		this.job = job;
 	}
 	
