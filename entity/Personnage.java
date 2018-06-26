@@ -27,7 +27,7 @@ public class Personnage {
 	@Column(name="IMAGE")
 	private String image;
 	
-	@Column(name="JOB", nullable=false, length=160)
+	@Column(name="JOB")
 	private Job job;
 
 	@OneToOne

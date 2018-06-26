@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="INVENTAIRE")
 public class Inventaire {
@@ -28,8 +30,8 @@ public class Inventaire {
 	inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
 	private List<Item> listeItemsInventaire;
 	
-	@NotNull
 	@OneToOne(mappedBy="inventaire")
+	@JsonIgnoreProperties("inventaire")
 	private Personnage personnage;
 
 	public Inventaire() {
