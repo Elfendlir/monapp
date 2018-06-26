@@ -21,6 +21,9 @@ public class Scenario {
 	@Column(name="ID")
 	private int id;
 	
+	@Column(name="TITRE")
+	private String titre;
+	
 	@OneToMany(mappedBy="scenario")
 	private List<Route> listeRoutes;
 	
