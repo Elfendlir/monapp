@@ -1,6 +1,5 @@
 package com.monapp.entity;
 
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -27,8 +25,8 @@ public class Partie {
 	private Personnage perso;
 	
 	@NotNull
-	@OneToMany(mappedBy="partie")
-	private List<Scenario> listeScenarios;
+	@OneToOne(mappedBy="partie")
+	private Scenario scenario;
 	
 	@NotNull
 	@ManyToOne
@@ -38,14 +36,14 @@ public class Partie {
 	public Partie() {
 	}
 	
-	public Partie(int id, @NotNull Personnage perso, @NotNull List<Scenario> listeScenarios, @NotNull Utilisateur user) {
+	public Partie(int id, Personnage perso, @NotNull Scenario scenario, @NotNull Utilisateur user) {
 		super();
 		this.id = id;
 		this.perso = perso;
-		this.listeScenarios = listeScenarios;
+		this.scenario = scenario;
 		this.user = user;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -62,14 +60,14 @@ public class Partie {
 		this.perso = perso;
 	}
 	
-	public List<Scenario> getListeScenarios() {
-		return listeScenarios;
+	public Scenario getScenario() {
+		return scenario;
 	}
-	
-	public void setListeScenarios(List<Scenario> listeScenarios) {
-		this.listeScenarios = listeScenarios;
+
+	public void setScenario(Scenario scenario) {
+		this.scenario = scenario;
 	}
-	
+
 	public Utilisateur getUser() {
 		return user;
 	}
