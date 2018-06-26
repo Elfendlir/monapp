@@ -7,9 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -23,38 +21,25 @@ public class Scenario {
 	@Column(name="ID")
 	private int id;
 	
-	@Column(name="SCENE")
-	private String scene;
-	
-	@OneToOne(mappedBy="scenario")
-	private Route route;
-	
-	@ManyToMany
-	@JoinTable(name="SCENARIO_ITEM",
-	joinColumns = @JoinColumn(name="SCENARIO_ID"),
-	inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
-	private List<Item> listeItemsScenario;
+	@OneToMany(mappedBy="scenario")
+	private List<Route> listeRoutes;
 	
 	@NotNull
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="PARTIE_ID")
 	private Partie partie;
 
-	//Constructeurs
 	public Scenario() {
 		super();
 	}
 
-	public Scenario(int id, String scene, Route route, List<Item> listeItemsScenario, Partie partie) {
+	public Scenario(int id, List<Route> listeRoutes, @NotNull Partie partie) {
 		super();
 		this.id = id;
-		this.scene = scene;
-		this.route = route;
-		this.listeItemsScenario = listeItemsScenario;
+		this.listeRoutes = listeRoutes;
 		this.partie = partie;
 	}
 
-	//Getters et Setters
 	public int getId() {
 		return id;
 	}
@@ -63,28 +48,12 @@ public class Scenario {
 		this.id = id;
 	}
 
-	public String getScene() {
-		return scene;
+	public List<Route> getListeRoutes() {
+		return listeRoutes;
 	}
 
-	public void setScene(String scene) {
-		this.scene = scene;
-	}
-
-	public Route getRoute() {
-		return route;
-	}
-
-	public void setRoute(Route route) {
-		this.route = route;
-	}
-
-	public List<Item> getListeItemsScenario() {
-		return listeItemsScenario;
-	}
-
-	public void setListeItemsScenario(List<Item> listeItemsScenario) {
-		this.listeItemsScenario = listeItemsScenario;
+	public void setListeRoutes(List<Route> listeRoutes) {
+		this.listeRoutes = listeRoutes;
 	}
 
 	public Partie getPartie() {

@@ -1,14 +1,17 @@
 package com.monapp.entity;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "ROUTE")
@@ -19,11 +22,26 @@ public class Route {
 	@Column(name="ID")
 	private int id;
 
-	@NotNull
-	@Column(name="DIRECTION")
-	private int[] direction;
+	@Column(name="SCENE")
+	private String scene;
+	
+	@Column(name="IMAGE_SCENE")
+	private String imageScene;
+	
+	@ManyToOne
+	@JoinColumn(name="ROUTE_INITIALE_ID")
+	private Route routeInitiale;
+	
+	@OneToMany(mappedBy="routeInitiale")
+	private List<Route> listeRoutesSuivantes;
 
-	@OneToOne
+	@ManyToMany
+	@JoinTable(name="ROUTE_ITEM",
+	joinColumns = @JoinColumn(name="ROUTE_ID"),
+	inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
+	private List<Item> listeItemsRoute;
+	
+	@ManyToOne
 	@JoinColumn(name = "SCENARIO_ID")
 	private Scenario scenario;
 	
@@ -31,10 +49,15 @@ public class Route {
 		super();
 	}
 
-	public Route(int id, @NotNull int[] direction, Scenario scenario) {
+	public Route(int id, String scene, String imageScene, Route routeInitiale, List<Route> listeRoutesSuivantes,
+			List<Item> listeItemsRoute, Scenario scenario) {
 		super();
 		this.id = id;
-		this.direction = direction;
+		this.scene = scene;
+		this.imageScene = imageScene;
+		this.routeInitiale = routeInitiale;
+		this.listeRoutesSuivantes = listeRoutesSuivantes;
+		this.listeItemsRoute = listeItemsRoute;
 		this.scenario = scenario;
 	}
 
@@ -46,12 +69,36 @@ public class Route {
 		this.id = id;
 	}
 
-	public int[] getDirection() {
-		return direction;
+	public String getScene() {
+		return scene;
 	}
 
-	public void setDirection(int[] direction) {
-		this.direction = direction;
+	public void setScene(String scene) {
+		this.scene = scene;
+	}
+
+	public String getImageScene() {
+		return imageScene;
+	}
+
+	public void setImageScene(String imageScene) {
+		this.imageScene = imageScene;
+	}
+
+	public List<Route> getListeRoutesSuivantes() {
+		return listeRoutesSuivantes;
+	}
+
+	public void setListeRoutesSuivantes(List<Route> listeRoutesSuivantes) {
+		this.listeRoutesSuivantes = listeRoutesSuivantes;
+	}
+
+	public List<Item> getListeItemsRoute() {
+		return listeItemsRoute;
+	}
+
+	public void setListeItemsRoute(List<Item> listeItemsRoute) {
+		this.listeItemsRoute = listeItemsRoute;
 	}
 
 	public Scenario getScenario() {
@@ -60,6 +107,14 @@ public class Route {
 
 	public void setScenario(Scenario scenario) {
 		this.scenario = scenario;
+	}
+
+	public Route getRouteInitiale() {
+		return routeInitiale;
+	}
+
+	public void setRouteInitiale(Route routeInitiale) {
+		this.routeInitiale = routeInitiale;
 	}
 
 }

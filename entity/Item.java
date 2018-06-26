@@ -30,22 +30,22 @@ public class Item {
 	@ManyToMany(mappedBy="listeItemsInventaire")
 	private List<Inventaire> listeInventaires;
 	
-	@ManyToMany(mappedBy="listeItemsScenario")
-	private List<Scenario> listeScenarios;
+	@ManyToMany(mappedBy="listeItemsRoute")
+	private List<Route> listeRoutes;
 
 	public Item() {
 		super();
 	}
 
 	public Item(int id, String nomItem, String description, String imageItem, List<Inventaire> listeInventaires,
-			List<Scenario> listeScenarios) {
+			List<Route> listeRoutes) {
 		super();
 		this.id = id;
 		this.nomItem = nomItem;
 		this.description = description;
 		this.imageItem = imageItem;
 		this.listeInventaires = listeInventaires;
-		this.listeScenarios = listeScenarios;
+		this.listeRoutes = listeRoutes;
 	}
 
 	public int getId() {
@@ -88,12 +88,12 @@ public class Item {
 		this.listeInventaires = listeInventaires;
 	}
 
-	public List<Scenario> getListeScenarios() {
-		return listeScenarios;
+	public List<Route> getListeRoutes() {
+		return listeRoutes;
 	}
 
-	public void setListeScenarios(List<Scenario> listeScenarios) {
-		this.listeScenarios = listeScenarios;
+	public void setListeRoutes(List<Route> listeRoutes) {
+		this.listeRoutes = listeRoutes;
 	}
 	
 }
