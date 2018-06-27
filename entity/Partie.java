@@ -21,14 +21,15 @@ public class Partie {
 	@Column(name="ID")
 	private int id;
 	
-	@OneToOne(mappedBy="partie")
+	@OneToOne
+	@JoinColumn(name="PERSO_ID")
 	private Personnage perso;
 	
 	@NotNull
-	@OneToOne(mappedBy="partie")
+	@ManyToOne
+	@JoinColumn(name="SCENARIO_ID")
 	private Scenario scenario;
 	
-	@NotNull
 	@ManyToOne
 	@JoinColumn(name="USER_ID")
 	private Utilisateur user;

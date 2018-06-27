@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="SCENARIO")
 public class Scenario {
@@ -27,20 +29,19 @@ public class Scenario {
 	@OneToMany(mappedBy="scenario")
 	private List<Route> listeRoutes;
 	
-	@NotNull
-	@OneToOne
-	@JoinColumn(name="PARTIE_ID")
-	private Partie partie;
+	@OneToMany(mappedBy="scenario")
+	@JsonIgnoreProperties({"perso","scenario"})
+	private List<Partie> listeParties;
 
 	public Scenario() {
 		super();
 	}
 
-	public Scenario(int id, List<Route> listeRoutes, @NotNull Partie partie) {
+	public Scenario(int id, List<Route> listeRoutes, @NotNull List<Partie> listeParties) {
 		super();
 		this.id = id;
 		this.listeRoutes = listeRoutes;
-		this.partie = partie;
+		this.listeParties = listeParties;
 	}
 
 	public int getId() {
@@ -59,12 +60,20 @@ public class Scenario {
 		this.listeRoutes = listeRoutes;
 	}
 
-	public Partie getPartie() {
-		return partie;
+	public String getTitre() {
+		return titre;
 	}
 
-	public void setPartie(Partie partie) {
-		this.partie = partie;
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
+	public List<Partie> getListeParties() {
+		return listeParties;
+	}
+
+	public void setListeParties(List<Partie> listeParties) {
+		this.listeParties = listeParties;
 	}
 	
 }

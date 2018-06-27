@@ -10,6 +10,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.monapp.enumeration.Job;
 
 @Entity
@@ -30,8 +31,8 @@ public class Personnage {
 	@Column(name="JOB")
 	private Job job;
 
-	@OneToOne
-	@JoinColumn(name="PARTIE_ID")
+	@OneToOne(mappedBy="perso")
+	@JsonIgnoreProperties("perso")
 	private Partie partie;
 	
 	@NotNull
