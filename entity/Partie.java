@@ -11,6 +11,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 @Table(name="PARTIE")
@@ -23,11 +25,13 @@ public class Partie {
 	
 	@OneToOne
 	@JoinColumn(name="PERSO_ID")
+	@JsonIgnoreProperties("partie")
 	private Personnage perso;
 	
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="SCENARIO_ID")
+	@JsonIgnoreProperties("listeParties")
 	private Scenario scenario;
 	
 	@ManyToOne
