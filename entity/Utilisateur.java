@@ -34,7 +34,7 @@ public class Utilisateur {
 
 	@NotNull
 	@Column(name="PASSWORD")
-	private int mdp;
+	private String mdp;
 	
 	@OneToMany(mappedBy="user")
 	@JsonIgnoreProperties("user")
@@ -44,7 +44,7 @@ public class Utilisateur {
 		super();
 	}
 
-	public Utilisateur(int id, @NotNull @Size(min = 4) String nom, @Email @NotNull String email, @NotNull int mdp,
+	public Utilisateur(int id, @NotNull @Size(min = 4) String nom, @Email @NotNull String email, @NotNull @NotNull String mdp,
 			List<Partie> listeParties) {
 		super();
 		this.id = id;
@@ -78,11 +78,11 @@ public class Utilisateur {
 		this.email = email;
 	}
 
-	public int getMdp() {
+	public @NotNull String getMdp() {
 		return mdp;
 	}
 
-	public void setMdp(int mdp) {
+	public void setMdp(String mdp) {
 		this.mdp = mdp;
 	}
 

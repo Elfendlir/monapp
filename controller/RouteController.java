@@ -42,7 +42,7 @@ public class RouteController
 		return new ResponseEntity<List<Route>>(routes, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/utilisateur/{id}")
+	@DeleteMapping("/route/{id}")
 	public ResponseEntity<Route> delete(@PathVariable("id") Integer id) {
 		Route tmp = routeDao.findByPrimaryKey(id);
 		if (tmp == null) {
