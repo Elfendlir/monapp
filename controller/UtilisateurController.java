@@ -37,7 +37,7 @@ public class UtilisateurController
 		}
 	}
 	
-	@GetMapping("/utilisateur/{mdp}/{email}")
+	@GetMapping("/utilisateurs/{mdp}/{email}")
 	public ResponseEntity<Utilisateur> login(@PathVariable("mdp") String mdp, @PathVariable("email") String mail) {
 
 		Utilisateur b = utilisateurDao.login(mail, mdp);
@@ -49,7 +49,7 @@ public class UtilisateurController
 		}
 	}
 	
-	@GetMapping("/utilisateur")
+	@GetMapping("/utilisateurs")
 	public ResponseEntity<List<Utilisateur>> findAll() {
 		List<Utilisateur> utilisateurs = utilisateurDao.findAll();
 		return new ResponseEntity<List<Utilisateur>>(utilisateurs, HttpStatus.OK);
