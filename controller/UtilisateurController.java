@@ -36,8 +36,20 @@ public class UtilisateurController
 			return new ResponseEntity<Utilisateur>(b, HttpStatus.OK);
 		}
 	}
+	
+	@GetMapping("/utilisateur/{mdp}/{email}")
+	public ResponseEntity<Utilisateur> login(@PathVariable("mdp") String mdp, @PathVariable("email") String mail) {
 
-	@GetMapping("/utilisateurs")
+		Utilisateur b = utilisateurDao.login(mail, mdp);
+
+		if (b == null) {
+			return new ResponseEntity<Utilisateur>(b, HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<Utilisateur>(b, HttpStatus.OK);
+		}
+	}
+	
+	@GetMapping("/utilisateur")
 	public ResponseEntity<List<Utilisateur>> findAll() {
 		List<Utilisateur> utilisateurs = utilisateurDao.findAll();
 		return new ResponseEntity<List<Utilisateur>>(utilisateurs, HttpStatus.OK);
