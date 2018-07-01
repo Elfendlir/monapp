@@ -8,8 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -24,6 +22,9 @@ public class Scenario {
 	@Column(name="TITRE")
 	private String titre;
 	
+	@Column(name="IMAGE")
+	private String image;
+	
 	@OneToMany(mappedBy="scenario")
 	private List<Route> listeRoutes;
 	
@@ -35,9 +36,11 @@ public class Scenario {
 		super();
 	}
 
-	public Scenario(int id, List<Route> listeRoutes, @NotNull List<Partie> listeParties) {
+	public Scenario(int id, String titre, String image, List<Route> listeRoutes, List<Partie> listeParties) {
 		super();
 		this.id = id;
+		this.titre = titre;
+		this.image = image;
 		this.listeRoutes = listeRoutes;
 		this.listeParties = listeParties;
 	}
@@ -72,6 +75,14 @@ public class Scenario {
 
 	public void setListeParties(List<Partie> listeParties) {
 		this.listeParties = listeParties;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 }
