@@ -43,4 +43,13 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	public Utilisateur update(Utilisateur entity) {
 		return em.merge(entity);
 	}
+	
+	public Utilisateur login(String email, String mdp) {
+		String querystring = "SELECT u FROM Utilisateur u WHERE u.email=? AND u.mdp=?" ;
+		Query query = em.createQuery( querystring ) ;
+		query.setParameter(0, email);
+		query.setParameter(1, mdp);
+		List<Utilisateur> list = query.getResultList() ;
+		return list.get(0);
+	}
 }

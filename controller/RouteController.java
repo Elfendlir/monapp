@@ -24,7 +24,7 @@ public class RouteController
 	@Autowired
 	RouteDao routeDao;
 
-	@GetMapping("/route/{id}")
+	@GetMapping("/routes/{id}")
 	public ResponseEntity<Route> findOne(@PathVariable("id") Integer id) {
 
 		Route b = routeDao.findByPrimaryKey(id);
@@ -36,13 +36,13 @@ public class RouteController
 		}
 	}
 
-	@GetMapping("/route")
+	@GetMapping("/routes")
 	public ResponseEntity<List<Route>> findAll() {
 		List<Route> routes = routeDao.findAll();
 		return new ResponseEntity<List<Route>>(routes, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/route/{id}")
+	@DeleteMapping("/routes/{id}")
 	public ResponseEntity<Route> delete(@PathVariable("id") Integer id) {
 		Route tmp = routeDao.findByPrimaryKey(id);
 		if (tmp == null) {
@@ -53,7 +53,7 @@ public class RouteController
 		}
 	}
 
-	@PostMapping("/route")
+	@PostMapping("/routes")
 	public ResponseEntity<Route> create(@Valid @RequestBody Route route) {
 		if (route.getId() > 0) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -62,7 +62,7 @@ public class RouteController
 		return new ResponseEntity<Route>(route, HttpStatus.CREATED);
 	}
 
-	@PutMapping("/route")
+	@PutMapping("/routes")
 	public ResponseEntity<Route> update(@RequestBody Route route) {
 		if (route.getId() == 0) {
 			return create(route);

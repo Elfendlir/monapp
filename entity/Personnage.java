@@ -38,6 +38,7 @@ public class Personnage {
 	@NotNull
 	@OneToOne
 	@JoinColumn(name="INVENTAIRE_ID")
+	//@JsonIgnoreProperties("personnage")
 	private Inventaire inventaire;
 	
 	public Personnage() {

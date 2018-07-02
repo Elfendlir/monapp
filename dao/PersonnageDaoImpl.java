@@ -1,11 +1,15 @@
 package com.monapp.dao;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.monapp.entity.Partie;
 import com.monapp.entity.Personnage;
 
 @Transactional
@@ -32,6 +36,11 @@ public class PersonnageDaoImpl implements PersonnageDao {
 	@Override
 	public void delete(Personnage entity) {
 		entity = em.merge(entity);
+		Partie partie = entity.getPartie();
+		if(partie != null) {
+			partie.setPerso(null);
+			em.remove(partie);
+		}
 		em.remove(entity);
 	}
 
