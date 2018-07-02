@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="ITEM")
 public class Item {
@@ -31,6 +33,7 @@ public class Item {
 	private List<Inventaire> listeInventaires;
 	
 	@ManyToMany(mappedBy="listeItemsRoute")
+	@JsonIgnoreProperties({"listeItemsRoute"})
 	private List<Route> listeRoutes;
 
 	public Item() {

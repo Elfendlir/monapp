@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "ROUTE")
 public class Route {
@@ -39,16 +41,19 @@ public class Route {
 	private Route routeInitiale;
 	
 	@OneToMany(mappedBy="routeInitiale")
+	@JsonIgnoreProperties({"routeInitiale","listeRoutesSuivantes","listeItemsRoute"})
 	private List<Route> listeRoutesSuivantes;
 	
 	@ManyToMany
 	@JoinTable(name="ROUTE_ITEM",
 	joinColumns = @JoinColumn(name="ROUTE_ID"),
 	inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
+	@JsonIgnoreProperties({"listeRoutes"})
 	private List<Item> listeItemsRoute;
 	
 	@ManyToOne
 	@JoinColumn(name = "SCENARIO_ID")
+	@JsonIgnoreProperties({"listeRoutes"})
 	private Scenario scenario;
 	
 	public Route() {
