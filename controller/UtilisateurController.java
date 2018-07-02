@@ -25,7 +25,7 @@ public class UtilisateurController
 	@Autowired
 	UtilisateurDao utilisateurDao;
 
-	@GetMapping("/utilisateur/{id}")
+	@GetMapping("/utilisateurs/{id}")
 	public ResponseEntity<Utilisateur> findOne(@PathVariable("id") Integer id) {
 
 		Utilisateur b = utilisateurDao.findByPrimaryKey(id);
@@ -37,13 +37,13 @@ public class UtilisateurController
 		}
 	}
 
-	@GetMapping("/utilisateur")
+	@GetMapping("/utilisateurs")
 	public ResponseEntity<List<Utilisateur>> findAll() {
 		List<Utilisateur> utilisateurs = utilisateurDao.findAll();
 		return new ResponseEntity<List<Utilisateur>>(utilisateurs, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/utilisateur/{id}")
+	@DeleteMapping("/utilisateurs/{id}")
 	public ResponseEntity<Utilisateur> delete(@PathVariable("id") Integer id) {
 		Utilisateur tmp = utilisateurDao.findByPrimaryKey(id);
 		if (tmp == null) {
@@ -54,7 +54,7 @@ public class UtilisateurController
 		}
 	}
 
-	@PostMapping("/utilisateur")
+	@PostMapping("/utilisateurs")
 	public ResponseEntity<Utilisateur> create(@Valid @RequestBody Utilisateur utilisateur) {
 		if (utilisateur.getId() > 0) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -63,7 +63,7 @@ public class UtilisateurController
 		return new ResponseEntity<Utilisateur>(utilisateur, HttpStatus.CREATED);
 	}
 
-	@PutMapping("/utilisateur")
+	@PutMapping("/utilisateurs")
 	public ResponseEntity<Utilisateur> update(@RequestBody Utilisateur utilisateur) {
 		if (utilisateur.getId() == 0) {
 			return create(utilisateur);

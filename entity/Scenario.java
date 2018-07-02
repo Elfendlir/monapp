@@ -27,6 +27,7 @@ public class Scenario {
 	private String titre;
 	
 	@OneToMany(mappedBy="scenario")
+	@JsonIgnoreProperties({"scenario"})
 	private List<Route> listeRoutes;
 	
 	@OneToMany(mappedBy="scenario")

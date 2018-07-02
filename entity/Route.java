@@ -22,11 +22,17 @@ public class Route {
 	@Column(name="ID")
 	private int id;
 
+	@Column(name="TITRE")
+	private String titre;
+	
 	@Column(name="SCENE")
 	private String scene;
 	
 	@Column(name="IMAGE_SCENE")
 	private String imageScene;
+	
+	@Column(name="DEBUT")
+	private boolean debut;
 	
 	@ManyToOne
 	@JoinColumn(name="ROUTE_INITIALE_ID")
@@ -34,7 +40,7 @@ public class Route {
 	
 	@OneToMany(mappedBy="routeInitiale")
 	private List<Route> listeRoutesSuivantes;
-
+	
 	@ManyToMany
 	@JoinTable(name="ROUTE_ITEM",
 	joinColumns = @JoinColumn(name="ROUTE_ID"),
@@ -49,12 +55,14 @@ public class Route {
 		super();
 	}
 
-	public Route(int id, String scene, String imageScene, Route routeInitiale, List<Route> listeRoutesSuivantes,
-			List<Item> listeItemsRoute, Scenario scenario) {
+	public Route(int id, String titre, String scene, String imageScene, boolean debut, Route routeInitiale,
+			List<Route> listeRoutesSuivantes, List<Item> listeItemsRoute, Scenario scenario) {
 		super();
 		this.id = id;
+		this.titre = titre;
 		this.scene = scene;
 		this.imageScene = imageScene;
+		this.debut = debut;
 		this.routeInitiale = routeInitiale;
 		this.listeRoutesSuivantes = listeRoutesSuivantes;
 		this.listeItemsRoute = listeItemsRoute;
@@ -63,6 +71,22 @@ public class Route {
 
 	public int getId() {
 		return id;
+	}
+
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
+	public boolean isDebut() {
+		return debut;
+	}
+
+	public void setDebut(boolean debut) {
+		this.debut = debut;
 	}
 
 	public void setId(int id) {
