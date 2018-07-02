@@ -1,6 +1,10 @@
 package com.monapp.entity;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,10 +42,11 @@ public class Route {
 	
 	@ManyToOne
 	@JoinColumn(name="ROUTE_INITIALE_ID")
+	@JsonIgnoreProperties({"listeRoutesSuivantes"})
 	private Route routeInitiale;
 	
 	@OneToMany(mappedBy="routeInitiale")
-	@JsonIgnoreProperties({"routeInitiale","listeRoutesSuivantes","listeItemsRoute"})
+	@JsonIgnoreProperties({"listeRoutesSuivantes","listeItemsRoute"})
 	private List<Route> listeRoutesSuivantes;
 	
 	@ManyToMany
@@ -53,7 +58,7 @@ public class Route {
 	
 	@ManyToOne
 	@JoinColumn(name = "SCENARIO_ID")
-	@JsonIgnoreProperties({"listeRoutes"})
+	@JsonIgnoreProperties({"listeRoutes","listeParties"})
 	private Scenario scenario;
 	
 	public Route() {

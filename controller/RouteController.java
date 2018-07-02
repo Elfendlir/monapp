@@ -58,8 +58,9 @@ public class RouteController
 		if (route.getId() > 0) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		routeDao.save(route);
-		return new ResponseEntity<Route>(route, HttpStatus.CREATED);
+		Route r = routeDao.save(route);
+		System.out.println("Controller Route: "+r.getId());
+		return new ResponseEntity<Route>(r, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/routes")
