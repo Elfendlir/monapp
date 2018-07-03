@@ -53,7 +53,7 @@ public class RouteDaoImpl implements RouteDao {
 
 	@Override
 	public Route getRouteInitiale(Integer id) {
-		String querystring = "SELECT i FROM Route i WHERE scenario.id = ? AND premiereRoute = TRUE" ;
+		String querystring = "SELECT i FROM Route i WHERE scenario.id = ? AND debut = TRUE" ;
 		Query query = em.createQuery( querystring );
 		query.setParameter(0, id);
 		List<Route> list = query.getResultList();
