@@ -53,7 +53,7 @@ public class Route {
 	
 	@ManyToOne
 	@JoinColumn(name = "SCENARIO_ID")
-	@JsonIgnoreProperties({"listeRoutes"})
+	@JsonIgnoreProperties({"listeRoutes","listeParties"})
 	private Scenario scenario;
 	
 	public Route() {
