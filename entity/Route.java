@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "ROUTE")
 public class Route {
@@ -21,6 +23,9 @@ public class Route {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ID")
 	private int id;
+
+	@Column(name="TITRE")
+	private String titre;
 	
 	@Column(name="SCENE")
 	private String scene;
@@ -28,40 +33,43 @@ public class Route {
 	@Column(name="IMAGE_SCENE")
 	private String imageScene;
 	
-	@Column(name="PREMIERE_SCENE")
-	private Boolean premiereRoute;
+	@Column(name="DEBUT")
+	private boolean debut;
 	
-	@OneToMany(mappedBy="currentRoute")
 	private List<Partie> listeParties;
-	
+	@OneToMany(mappedBy="currentRoute")
 	@ManyToOne
 	@JoinColumn(name="ROUTE_INITIALE_ID")
 	private Route routeInitiale;
 	
 	@OneToMany(mappedBy="routeInitiale")
+	@JsonIgnoreProperties({"routeInitiale","listeRoutesSuivantes","listeItemsRoute"})
 	private List<Route> listeRoutesSuivantes;
 	
 	@ManyToMany
 	@JoinTable(name="ROUTE_ITEM",
 	joinColumns = @JoinColumn(name="ROUTE_ID"),
 	inverseJoinColumns = @JoinColumn(name="ITEM_ID"))
+	@JsonIgnoreProperties({"listeRoutes"})
 	private List<Item> listeItemsRoute;
 	
 	@ManyToOne
 	@JoinColumn(name = "SCENARIO_ID")
+	@JsonIgnoreProperties({"listeRoutes","listeParties"})
 	private Scenario scenario;
 	
 	public Route() {
 		super();
 	}
 
-	public Route(int id, String scene, String imageScene, Boolean premiereRoute, List<Partie> listeParties,
-			Route routeInitiale, List<Route> listeRoutesSuivantes, List<Item> listeItemsRoute, Scenario scenario) {
+	public Route(int id, String titre, String scene, String imageScene, boolean debut, Route routeInitiale,
+			List<Route> listeRoutesSuivantes, List<Item> listeItemsRoute, Scenario scenario) {
 		super();
 		this.id = id;
+		this.titre = titre;
 		this.scene = scene;
 		this.imageScene = imageScene;
-		this.premiereRoute = premiereRoute;
+		this.debut = debut;
 		this.listeParties = listeParties;
 		this.routeInitiale = routeInitiale;
 		this.listeRoutesSuivantes = listeRoutesSuivantes;
@@ -72,7 +80,23 @@ public class Route {
 	public int getId() {
 		return id;
 	}
-	
+
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
+	public boolean isDebut() {
+		return debut;
+	}
+
+	public void setDebut(boolean debut) {
+		this.debut = debut;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
