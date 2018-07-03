@@ -45,7 +45,7 @@ public class Route {
 	
 	@ManyToOne
 	@JoinColumn(name="ROUTE_INITIALE_ID")
-	@JsonIgnoreProperties({"listeRoutesSuivantes"})
+	@JsonIgnoreProperties({"listeRoutesSuivantes","listeParties","listeItemsRoute"})
 	private Route routeInitiale;
 	
 	@OneToMany(mappedBy="routeInitiale")

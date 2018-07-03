@@ -71,7 +71,6 @@ public class RouteController
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		Route r = routeDao.save(route);
-		System.out.println("Controller Route: "+r.getId());
 		return new ResponseEntity<Route>(r, HttpStatus.CREATED);
 	}
 
@@ -88,5 +87,11 @@ public class RouteController
 	@ExceptionHandler({ Exception.class })
 	public ResponseEntity<Object> errors() {
 		return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+	}
+
+	@GetMapping("/routes/byscenario/{id}")
+	public ResponseEntity<List<Route>> getRoutesByScenarioId(@PathVariable("id") Integer id) {
+		List<Route> routes = routeDao.getRoutesByScenarioId(id);
+		return new ResponseEntity<List<Route>>(routes, HttpStatus.OK);
 	}
 }

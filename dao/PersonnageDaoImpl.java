@@ -26,7 +26,13 @@ public class PersonnageDaoImpl implements PersonnageDao {
 		List<Personnage> list = query.getResultList() ;
 		return list;
 	}
-
+	@Override
+	public List<Personnage> findFreePersonnages() {
+		String querystring = "SELECT i FROM Personnage i WHERE NOT EXISTS (SELECT p.perso FROM Partie p WHERE i = p.perso)" ;
+		Query query = em.createQuery( querystring ) ;
+		List<Personnage> list = query.getResultList() ;
+		return list;
+	}
 	@Override
 	public Personnage save(Personnage entity) {
 		em.persist(entity);
