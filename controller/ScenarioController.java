@@ -61,6 +61,7 @@ public class ScenarioController {
 		scenarioDao.save(scenario);
 		return new ResponseEntity<Scenario>(scenario, HttpStatus.CREATED);
 	}
+	
 	@PutMapping("/scenarios")
 	public ResponseEntity<Scenario> update(@RequestBody Scenario scenario) {
 		if (scenario.getId() == 0) {

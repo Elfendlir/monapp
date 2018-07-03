@@ -38,7 +38,7 @@ public class ScenarioDaoImpl implements ScenarioDao {
 	public void delete(Scenario entity) {
 		entity = em.merge(entity);
 		em.remove(entity);
-	}
+	} 
 
 	@Override
 	public Scenario update(Scenario entity) {

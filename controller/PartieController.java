@@ -61,6 +61,7 @@ public class PartieController {
 		partieDao.save(partie);
 		return new ResponseEntity<Partie>(partie, HttpStatus.CREATED);
 	}
+	
 	@PutMapping("/parties")
 	public ResponseEntity<Partie> update(@RequestBody Partie partie) {
 		if (partie.getId() == 0) {

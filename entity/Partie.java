@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
 @Entity
 @Table(name="PARTIE")
 public class Partie {
@@ -35,17 +34,22 @@ public class Partie {
 	private Scenario scenario;
 	
 	@ManyToOne
+	@JoinColumn(name="CURRENT_ROUTE_ID")
+	private Route currentRoute;
+	
+	@ManyToOne
 	@JoinColumn(name="USER_ID")
 	private Utilisateur user;
 	
 	public Partie() {
 	}
-	
-	public Partie(int id, Personnage perso, @NotNull Scenario scenario, @NotNull Utilisateur user) {
+
+	public Partie(int id, Personnage perso, @NotNull Scenario scenario, Route currentRoute, Utilisateur user) {
 		super();
 		this.id = id;
 		this.perso = perso;
 		this.scenario = scenario;
+		this.currentRoute = currentRoute;
 		this.user = user;
 	}
 
@@ -79,6 +83,14 @@ public class Partie {
 	
 	public void setUser(Utilisateur user) {
 		this.user = user;
+	}
+
+	public Route getCurrentRoute() {
+		return currentRoute;
+	}
+
+	public void setCurrentRoute(Route currentRoute) {
+		this.currentRoute = currentRoute;
 	}
 	
 }

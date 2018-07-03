@@ -47,4 +47,13 @@ public class RouteDaoImpl implements RouteDao {
 	public Route update(Route entity) {
 		return em.merge(entity);
 	}
+
+	@Override
+	public Route getRouteInitiale(Integer id) {
+		String querystring = "SELECT i FROM Route i WHERE scenario.id = ? AND premiereRoute = TRUE" ;
+		Query query = em.createQuery( querystring );
+		query.setParameter(0, id);
+		List<Route> list = query.getResultList();
+		return list.get(0);
+	}
 }

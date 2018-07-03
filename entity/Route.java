@@ -40,6 +40,9 @@ public class Route {
 	@Column(name="DEBUT")
 	private boolean debut;
 	
+	@OneToMany(mappedBy="currentRoute")
+	private List<Partie> listeParties;
+	
 	@ManyToOne
 	@JoinColumn(name="ROUTE_INITIALE_ID")
 	@JsonIgnoreProperties({"listeRoutesSuivantes"})
@@ -65,14 +68,15 @@ public class Route {
 		super();
 	}
 
-	public Route(int id, String titre, String scene, String imageScene, boolean debut, Route routeInitiale,
-			List<Route> listeRoutesSuivantes, List<Item> listeItemsRoute, Scenario scenario) {
+	public Route(int id, String titre, String scene, String imageScene, boolean debut, List<Partie> listeParties,
+			Route routeInitiale, List<Route> listeRoutesSuivantes, List<Item> listeItemsRoute, Scenario scenario) {
 		super();
 		this.id = id;
 		this.titre = titre;
 		this.scene = scene;
 		this.imageScene = imageScene;
 		this.debut = debut;
+		this.listeParties = listeParties;
 		this.routeInitiale = routeInitiale;
 		this.listeRoutesSuivantes = listeRoutesSuivantes;
 		this.listeItemsRoute = listeItemsRoute;
@@ -149,6 +153,14 @@ public class Route {
 
 	public void setRouteInitiale(Route routeInitiale) {
 		this.routeInitiale = routeInitiale;
+	}
+
+	public List<Partie> getListeParties() {
+		return listeParties;
+	}
+
+	public void setListeParties(List<Partie> listeParties) {
+		this.listeParties = listeParties;
 	}
 
 }
