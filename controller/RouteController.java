@@ -35,6 +35,18 @@ public class RouteController
 			return new ResponseEntity<Route>(b, HttpStatus.OK);
 		}
 	}
+	
+	@GetMapping("/routes/initiale/{id}")
+	public ResponseEntity<Route> findInitialRoute(@PathVariable("id") Integer id) {
+
+		Route b = routeDao.getRouteInitiale(id);
+
+		if (b == null) {
+			return new ResponseEntity<Route>(b, HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<Route>(b, HttpStatus.OK);
+		}
+	}
 
 	@GetMapping("/routes")
 	public ResponseEntity<List<Route>> findAll() {

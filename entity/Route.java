@@ -21,12 +21,18 @@ public class Route {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ID")
 	private int id;
-
+	
 	@Column(name="SCENE")
 	private String scene;
 	
 	@Column(name="IMAGE_SCENE")
 	private String imageScene;
+	
+	@Column(name="PREMIERE_SCENE")
+	private Boolean premiereRoute;
+	
+	@OneToMany(mappedBy="currentRoute")
+	private List<Partie> listeParties;
 	
 	@ManyToOne
 	@JoinColumn(name="ROUTE_INITIALE_ID")
@@ -34,7 +40,7 @@ public class Route {
 	
 	@OneToMany(mappedBy="routeInitiale")
 	private List<Route> listeRoutesSuivantes;
-
+	
 	@ManyToMany
 	@JoinTable(name="ROUTE_ITEM",
 	joinColumns = @JoinColumn(name="ROUTE_ID"),
@@ -49,12 +55,14 @@ public class Route {
 		super();
 	}
 
-	public Route(int id, String scene, String imageScene, Route routeInitiale, List<Route> listeRoutesSuivantes,
-			List<Item> listeItemsRoute, Scenario scenario) {
+	public Route(int id, String scene, String imageScene, Boolean premiereRoute, List<Partie> listeParties,
+			Route routeInitiale, List<Route> listeRoutesSuivantes, List<Item> listeItemsRoute, Scenario scenario) {
 		super();
 		this.id = id;
 		this.scene = scene;
 		this.imageScene = imageScene;
+		this.premiereRoute = premiereRoute;
+		this.listeParties = listeParties;
 		this.routeInitiale = routeInitiale;
 		this.listeRoutesSuivantes = listeRoutesSuivantes;
 		this.listeItemsRoute = listeItemsRoute;
@@ -64,7 +72,7 @@ public class Route {
 	public int getId() {
 		return id;
 	}
-
+	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -115,6 +123,22 @@ public class Route {
 
 	public void setRouteInitiale(Route routeInitiale) {
 		this.routeInitiale = routeInitiale;
+	}
+
+	public Boolean getPremiereRoute() {
+		return premiereRoute;
+	}
+
+	public void setPremiereRoute(Boolean premiereRoute) {
+		this.premiereRoute = premiereRoute;
+	}
+
+	public List<Partie> getListeParties() {
+		return listeParties;
+	}
+
+	public void setListeParties(List<Partie> listeParties) {
+		this.listeParties = listeParties;
 	}
 
 }

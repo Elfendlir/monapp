@@ -4,4 +4,5 @@ import com.monapp.entity.Route;
 
 public interface RouteDao extends GenericDao<Route, Integer> {
 
+	Route getRouteInitiale(Integer id);
 }
