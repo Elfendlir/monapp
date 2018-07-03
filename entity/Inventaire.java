@@ -31,7 +31,7 @@ public class Inventaire {
 	private List<Item> listeItemsInventaire;
 	
 	@OneToOne(mappedBy="inventaire")
-	@JsonIgnoreProperties("inventaire")
+	@JsonIgnoreProperties(value={"inventaire"}, allowSetters = true)
 	private Personnage personnage;
 
 	public Inventaire() {

@@ -49,7 +49,7 @@ public class Route {
 	private Route routeInitiale;
 	
 	@OneToMany(mappedBy="routeInitiale")
-	@JsonIgnoreProperties({"listeRoutesSuivantes","listeItemsRoute"})
+	@JsonIgnoreProperties({"listeParties","listeRoutesSuivantes","listeItemsRoute"})
 	private List<Route> listeRoutesSuivantes;
 	
 	@ManyToMany

@@ -26,7 +26,7 @@ public class Scenario {
 	private String image;
 	
 	@OneToMany(mappedBy="scenario")
-	@JsonIgnoreProperties({"scenario","routeInitiale"})
+	@JsonIgnoreProperties({"scenario","routeInitiale","listeRoutes"})
 	private List<Route> listeRoutes;
 	
 	@OneToMany(mappedBy="scenario")

@@ -24,13 +24,13 @@ public class Partie {
 	
 	@OneToOne
 	@JoinColumn(name="PERSO_ID")
-	@JsonIgnoreProperties("partie")
+	@JsonIgnoreProperties(value={"partie","inventaire"}, allowSetters = true)
 	private Personnage perso;
 	
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="SCENARIO_ID")
-	@JsonIgnoreProperties("listeParties")
+	@JsonIgnoreProperties({"listeParties","listeRoutes"})
 	private Scenario scenario;
 	
 	@ManyToOne
