@@ -42,6 +42,12 @@ public class PersonnageController {
 		return new ResponseEntity<List<Personnage>>(personnages, HttpStatus.OK);
 	}
 	
+	@GetMapping("/personnages/free")
+	public ResponseEntity<List<Personnage>> findFreePersonnages() {
+		List<Personnage> personnages = personnageDao.findFreePersonnages();
+		return new ResponseEntity<List<Personnage>>(personnages, HttpStatus.OK);
+	}
+	
 	@DeleteMapping("/personnages/{id}")
 	public ResponseEntity<Personnage> delete(@PathVariable("id") Integer id){
 		Personnage tmp = personnageDao.findByPrimaryKey(id);
