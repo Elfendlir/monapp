@@ -24,7 +24,7 @@ public class RouteDaoImpl implements RouteDao {
 
 	@Override
 	public Route save(Route entity) {
-		em.persist(entity);
+		em.merge(entity);
 		List<Route> list = entity.getListeRoutesSuivantes();
 		for (Route route : list) {
 			route.setRouteInitiale(route);
