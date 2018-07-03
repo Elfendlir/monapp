@@ -36,8 +36,9 @@ public class Route {
 	@Column(name="DEBUT")
 	private boolean debut;
 	
-	private List<Partie> listeParties;
 	@OneToMany(mappedBy="currentRoute")
+	private List<Partie> listeParties;
+	
 	@ManyToOne
 	@JoinColumn(name="ROUTE_INITIALE_ID")
 	private Route routeInitiale;
@@ -62,8 +63,8 @@ public class Route {
 		super();
 	}
 
-	public Route(int id, String titre, String scene, String imageScene, boolean debut, Route routeInitiale,
-			List<Route> listeRoutesSuivantes, List<Item> listeItemsRoute, Scenario scenario) {
+	public Route(int id, String titre, String scene, String imageScene, boolean debut, List<Partie> listeParties,
+			Route routeInitiale, List<Route> listeRoutesSuivantes, List<Item> listeItemsRoute, Scenario scenario) {
 		super();
 		this.id = id;
 		this.titre = titre;
@@ -147,14 +148,6 @@ public class Route {
 
 	public void setRouteInitiale(Route routeInitiale) {
 		this.routeInitiale = routeInitiale;
-	}
-
-	public Boolean getPremiereRoute() {
-		return premiereRoute;
-	}
-
-	public void setPremiereRoute(Boolean premiereRoute) {
-		this.premiereRoute = premiereRoute;
 	}
 
 	public List<Partie> getListeParties() {
